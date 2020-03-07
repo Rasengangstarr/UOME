@@ -1,11 +1,24 @@
 #!/bin/bash
 
-if [ $# -lt 1 ]; then
+re='^[0-9]+([.][0-9]+)?$'
+
+if [ $# -lt 1 ]
+then
 	printf "help placeholder"
 fi
 
-if [ "$1" != "" ]; then
+if [ "$1" != "" ] && [ "$2" != "" ] && [[ $2 =~ $re ]]
+then
 	touch $1.txt
 	echo $2 >> $1.txt
+
+elif [ "$2" != "" ] && ! [[ $2 =~ $re ]]
+then
+	echo "second argument must be a number"
+
+elif [ "$1" != "" ]
+then
+	touch $1.txt
+	awk '{s+=$1} END {print s}' $1.txt
 fi
-	
+
