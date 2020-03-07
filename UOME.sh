@@ -4,7 +4,7 @@ re='^[+-]?[0-9]+([.][0-9]+)?$'
 
 if [ $# -lt 1 ]
 then
-	echo "help placeholder"
+	printf "usage: UOME [options] [person_name] [amount]\n  options:\n    -l		       Lists all amounts owed by all persons\n,    -l person_name     Lists all transactions for a person\n, note: if a number is negative that means you owe them the amount\n"
 fi
 
 if [ "$1" == "-l" ] && [ "$2" == "" ]
