@@ -4,10 +4,14 @@ re='^[0-9]+([.][0-9]+)?$'
 
 if [ $# -lt 1 ]
 then
-	printf "help placeholder"
+	echo "help placeholder"
 fi
 
-if [ "$1" != "" ] && [ "$2" != "" ] && [[ $2 =~ $re ]]
+if [ "$1" == "-l" ]
+then
+find . -name '*.txt' -printf "%f " -exec awk '{ sum += $1 } END{ print sum }' {} \; | sed "s/\.txt//"
+
+elif [ "$1" != "" ] && [ "$2" != "" ] && [[ $2 =~ $re ]]
 then
 	touch $1.txt
 	echo $2 >> $1.txt
